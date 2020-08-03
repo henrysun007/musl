@@ -1,15 +1,5 @@
 /* Copyright 2011-2012 Nicholas J. Kain, licensed under standard MIT license */
-.macro OCCLUM_SYSCALL
-	// Is running on Occlum?
-	cmpq $0, __occlum_entry(%rip)
-	je 1f
-	// Do Occlum syscall
-	lea 8(%rip), %rcx
-	jmp __occlum_entry(%rip)
-1:
-	// Do Linux syscall
-	syscall
-.endm
+.include \"../../internal/occlum/occlum_syscall.s\"
 
 .text
 .global __unmapself_on_x86_64
